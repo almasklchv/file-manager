@@ -1,0 +1,21 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "This repository is the part of file-manager assignments https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almasklchv/file-manager.git"
+  },
+  "author": "Almas Kilichov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/almasklchv/file-manager/issues"
+  },
+  "homepage": "https://github.com/almasklchv/file-manager#readme"
+}
