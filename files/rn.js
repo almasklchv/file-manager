@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { FailError } from "./errors.js";
+import { FailError } from "../errors.js";
 
 export async function renameFile(initPath, oldFileName, fileName) {
   const pathToFile = path.resolve(oldFileName.startsWith('/') || initPath, oldFileName);

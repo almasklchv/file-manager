@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import { createReadStream } from "fs";
 import path from "path";
-import { FailError, InputError } from "./errors.js";
+import { FailError, InputError } from "../errors.js";
 
 export async function printFileContent(init, fileName) {
   let pathTo = ''

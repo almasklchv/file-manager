@@ -1,8 +1,9 @@
 import { createWriteStream, createReadStream } from "fs";
+import fs from "fs/promises";
 import path from "path";
-import { FailError } from "./errors.js";
+import { FailError } from "../errors.js";
 
-export async function copyFile(initPath, pathToFile, pathToDirectory) {
+export async function moveFile(initPath, pathToFile, pathToDirectory) {
   const sourcePath = path.resolve(
     pathToFile.startsWith("/") || initPath,
     pathToFile
@@ -20,7 +21,10 @@ export async function copyFile(initPath, pathToFile, pathToDirectory) {
 
     rs.on("error", () => reject(new FailError()));
     ws.on("error", () => reject(new FailError()));
-    ws.on("finish", resolve);
+    ws.on("finish", () => {
+      fs.rm(sourcePath);
+      return resolve();
+    });
 
     rs.pipe(ws);
   });

@@ -1,14 +1,14 @@
 import { homedir } from "os";
 import { greetUser } from "./greeting.js";
-import { changeDirectory } from "./cd.js";
+import { changeDirectory } from "./navigation/cd.js";
 import { InputError } from "./errors.js";
-import { listFiles } from "./ls.js";
-import { printFileContent } from "./cat.js";
-import { addFile } from "./add.js";
-import { renameFile } from "./rn.js";
-import { copyFile } from "./cp.js";
-import { moveFile } from "./mv.js";
-import { removeFile } from "./rm.js";
+import { listFiles } from "./navigation/ls.js";
+import { printFileContent } from "./files/cat.js";
+import { addFile } from "./files/add.js";
+import { renameFile } from "./files/rn.js";
+import { copyFile } from "./files/cp.js";
+import { moveFile } from "./files/mv.js";
+import { removeFile } from "./files/rm.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
