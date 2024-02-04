@@ -11,6 +11,9 @@ import { moveFile } from "./files/mv.js";
 import { removeFile } from "./files/rm.js";
 import { getEOL } from "./os/eol.js";
 import { getCPUInfo } from "./os/cpus.js";
+import { getHomedir } from "./os/homedir.js";
+import { getSystemUsername } from "./os/username.js";
+import { getArch } from "./os/architecture.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -79,6 +82,12 @@ process.stdin.on("data", async (input) => {
       getEOL();
     } else if (inputArgs[0] === "os" && inputArgs[1] === "--cpus") {
       getCPUInfo();
+    } else if (inputArgs[0] === "os" && inputArgs[1] === "--homedir") {
+      getHomedir();
+    } else if (inputArgs[0] === "os" && inputArgs[1] === "--username") {
+      getSystemUsername();
+    } else if (inputArgs[0] === "os" && inputArgs[1] === "--architecture") {
+      getArch();
     } else {
       throw new InputError();
     }
