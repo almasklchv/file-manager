@@ -5,6 +5,7 @@ import { InputError } from "./errors.js";
 import { listFiles } from "./ls.js";
 import { printFileContent } from "./cat.js";
 import { addFile } from "./add.js";
+import { renameFile } from "./rn.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -45,6 +46,12 @@ process.stdin.on("data", async (input) => {
       }
 
       await addFile(currentDirectory, inputArgs[1]);
+    } else if (inputArgs[0] === "rn") {
+      if (inputArgs.length <= 2) {
+        throw new InputError();
+      }
+
+      await renameFile(currentDirectory, inputArgs[1], inputArgs[2]);
     } else {
       throw new InputError();
     }
