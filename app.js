@@ -9,6 +9,8 @@ import { renameFile } from "./files/rn.js";
 import { copyFile } from "./files/cp.js";
 import { moveFile } from "./files/mv.js";
 import { removeFile } from "./files/rm.js";
+import { getEOL } from "./os/eol.js";
+import { getCPUInfo } from "./os/cpus.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -73,6 +75,10 @@ process.stdin.on("data", async (input) => {
       }
 
       await removeFile(currentDirectory, inputArgs[1]);
+    } else if (inputArgs[0] === "os" && inputArgs[1] === "--EOL") {
+      getEOL();
+    } else if (inputArgs[0] === "os" && inputArgs[1] === "--cpus") {
+      getCPUInfo();
     } else {
       throw new InputError();
     }
