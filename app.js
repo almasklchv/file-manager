@@ -6,6 +6,8 @@ import { listFiles } from "./ls.js";
 import { printFileContent } from "./cat.js";
 import { addFile } from "./add.js";
 import { renameFile } from "./rn.js";
+import { copyFile } from "./cp.js";
+import { moveFile } from "./mv.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -52,6 +54,18 @@ process.stdin.on("data", async (input) => {
       }
 
       await renameFile(currentDirectory, inputArgs[1], inputArgs[2]);
+    } else if (inputArgs[0] === "cp") {
+      if (inputArgs.length <= 2) {
+        throw new InputError();
+      }
+
+      await copyFile(currentDirectory, inputArgs[1], inputArgs[2]);
+    } else if (inputArgs[0] === "mv") {
+      if (inputArgs.length <= 2) {
+        throw new InputError();
+      }
+
+      await moveFile(currentDirectory, inputArgs[1], inputArgs[2]);
     } else {
       throw new InputError();
     }
