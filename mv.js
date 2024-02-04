@@ -4,9 +4,16 @@ import path from "path";
 import { FailError } from "./errors.js";
 
 export async function moveFile(initPath, pathToFile, pathToDirectory) {
-  const sourcePath = path.resolve(initPath, pathToFile);
+  const sourcePath = path.resolve(
+    pathToFile.startsWith("/") || initPath,
+    pathToFile
+  );
   const fileName = path.basename(sourcePath);
-  const destinationPath = path.resolve(initPath, pathToDirectory, fileName);
+  const destinationPath = path.resolve(
+    pathToDirectory.startsWith("/") || initPath,
+    pathToDirectory,
+    fileName
+  );
 
   return new Promise((resolve, reject) => {
     const rs = createReadStream(sourcePath);

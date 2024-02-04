@@ -8,6 +8,7 @@ import { addFile } from "./add.js";
 import { renameFile } from "./rn.js";
 import { copyFile } from "./cp.js";
 import { moveFile } from "./mv.js";
+import { removeFile } from "./rm.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -66,6 +67,12 @@ process.stdin.on("data", async (input) => {
       }
 
       await moveFile(currentDirectory, inputArgs[1], inputArgs[2]);
+    } else if (inputArgs[0] === "rm") {
+      if (inputArgs.length <= 1) {
+        throw new InputError();
+      }
+
+      await removeFile(currentDirectory, inputArgs[1]);
     } else {
       throw new InputError();
     }
