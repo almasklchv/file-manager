@@ -3,7 +3,8 @@ import { greetUser } from "./greeting.js";
 import { changeDirectory } from "./cd.js";
 import { InputError } from "./errors.js";
 import { listFiles } from "./ls.js";
-
+import { printFileContent } from "./cat.js";
+import { addFile } from "./add.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -31,13 +32,25 @@ process.stdin.on("data", async (input) => {
 
       currentDirectory = await changeDirectory(currentDirectory, inputArgs[1]);
     } else if (inputArgs[0] === "ls") {
-      listFiles(currentDirectory);
+      await listFiles(currentDirectory);
+    } else if (inputArgs[0] === "cat") {
+      if (inputArgs.length <= 1) {
+        throw new InputError();
+      }
+
+      await printFileContent(currentDirectory, inputArgs[1]);
+    } else if (inputArgs[0] === "add") {
+      if (inputArgs.length <= 1) {
+        throw new InputError();
+      }
+
+      await addFile(currentDirectory, inputArgs[1]);
     } else {
       throw new InputError();
     }
   } catch (e) {
     if (e.name === "InputError") console.log(e.message);
-    if (e.name === "FailError") console.log(e.message);
+    else if (e.name === "FailError") console.log(e.message);
   }
 
   process.stdin.resume();

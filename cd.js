@@ -1,6 +1,6 @@
 import path from "path";
 import { access, stat } from "fs/promises";
-import { InputError } from "./errors.js";
+import { FailError, InputError } from "./errors.js";
 
 export async function changeDirectory(init, dest) {
   const destDir = path.resolve(init, dest);
@@ -9,6 +9,8 @@ export async function changeDirectory(init, dest) {
     throw new InputError();
   });
 
-  if ((!(await stat(destDir))).isDirectory()) throw new InputError();
+  const destStat = await stat(destDir);
+
+  if (!destStat.isDirectory()) throw new FailError();
   return destDir;
 }
