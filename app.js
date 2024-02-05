@@ -15,6 +15,8 @@ import { getHomedir } from "./os/homedir.js";
 import { getSystemUsername } from "./os/username.js";
 import { getArch } from "./os/architecture.js";
 import { calculateHash } from "./hash/hash.js";
+import { compress } from "./zip/compress.js";
+import { decompress } from "./zip/decompress.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -91,6 +93,18 @@ process.stdin.on("data", async (input) => {
       getArch();
     } else if (inputArgs[0] === "hash") {
       await calculateHash(currentDirectory, inputArgs[1]);
+    } else if (inputArgs[0] === "compress") {
+      if (inputArgs.length <= 2) {
+        throw new InputError();
+      }
+
+      await compress(currentDirectory, inputArgs[1], inputArgs[2]);
+    } else if (inputArgs[0] === "decompress") {
+      if (inputArgs.length <= 2) {
+        throw new InputError();
+      }
+
+      await decompress(currentDirectory, inputArgs[1], inputArgs[2]);
     } else {
       throw new InputError();
     }
