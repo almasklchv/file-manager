@@ -14,6 +14,7 @@ import { getCPUInfo } from "./os/cpus.js";
 import { getHomedir } from "./os/homedir.js";
 import { getSystemUsername } from "./os/username.js";
 import { getArch } from "./os/architecture.js";
+import { calculateHash } from "./hash/hash.js";
 
 const username = process.argv[2].slice(11);
 greetUser(username);
@@ -88,6 +89,8 @@ process.stdin.on("data", async (input) => {
       getSystemUsername();
     } else if (inputArgs[0] === "os" && inputArgs[1] === "--architecture") {
       getArch();
+    } else if (inputArgs[0] === "hash") {
+      await calculateHash(currentDirectory, inputArgs[1]);
     } else {
       throw new InputError();
     }
